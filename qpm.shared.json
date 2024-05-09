@@ -9,8 +9,8 @@
       "version": "0.1.0",
       "url": "https://github.com/RedBrumbler/BeatSaverVoting.Quest",
       "additionalData": {
-        "cmake": false,
-        "overrideSoName": "libbeatsavervoting.so"
+        "overrideSoName": "libbeatsavervoting.so",
+        "cmake": false
       }
     },
     "workspace": {
@@ -96,17 +96,17 @@
     {
       "dependency": {
         "id": "web-utils",
-        "versionRange": "=0.5.0",
+        "versionRange": "=0.5.1",
         "additionalData": {
-          "soLink": "https://github.com/RedBrumbler/WebUtils/releases/download/v0.5.0/libweb-utils.so",
-          "debugSoLink": "https://github.com/RedBrumbler/WebUtils/releases/download/v0.5.0/debug_libweb-utils.so",
+          "soLink": "https://github.com/RedBrumbler/WebUtils/releases/download/v0.5.1/libweb-utils.so",
+          "debugSoLink": "https://github.com/RedBrumbler/WebUtils/releases/download/v0.5.1/debug_libweb-utils.so",
           "overrideSoName": "libweb-utils.so",
-          "modLink": "https://github.com/RedBrumbler/WebUtils/releases/download/v0.5.0/WebUtils.qmod",
-          "branchName": "version/v0_5_0",
+          "modLink": "https://github.com/RedBrumbler/WebUtils/releases/download/v0.5.1/WebUtils.qmod",
+          "branchName": "version/v0_5_1",
           "cmake": false
         }
       },
-      "version": "0.5.0"
+      "version": "0.5.1"
     },
     {
       "dependency": {

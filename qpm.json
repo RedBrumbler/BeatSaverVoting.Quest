@@ -24,12 +24,12 @@
   "dependencies": [
     {
       "id": "beatsaverplusplus",
-      "versionRange": "^0.0.6",
+      "versionRange": "^0.0.8",
       "additionalData": {}
     },
     {
       "id": "web-utils",
-      "versionRange": "^0.5.0",
+      "versionRange": "^0.5.2",
       "additionalData": {}
     },
     {
