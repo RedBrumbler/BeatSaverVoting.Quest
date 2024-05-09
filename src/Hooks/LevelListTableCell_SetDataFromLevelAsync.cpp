@@ -35,17 +35,18 @@ MAKE_AUTO_HOOK_MATCH(LevelListTableCell_SetDataFromLevelAsync, &GlobalNamespace:
         defaultBadge = badgeImg->sprite;
     }
 
-    switch (voteStatus.value()) {
-        using enum BeatSaverVoting::VoteType;
-        case Upvote: {
-            BSML::Utilities::SetImage(badgeImg, isFavorite ? MOD_ID "_fav_uv" : MOD_ID "_uv");
-        } break;
-        case Downvote: {
-            BSML::Utilities::SetImage(badgeImg, isFavorite ? MOD_ID "_fav_dv" : MOD_ID "_dv");
-        } break;
-        default: {
-            badgeImg->sprite = defaultBadge.ptr();
-        } break;
+    if (voteStatus.has_value()) {
+        switch (voteStatus.value()) {
+            using enum BeatSaverVoting::VoteType;
+            case Upvote: {
+                BSML::Utilities::SetImage(badgeImg, isFavorite ? MOD_ID "_fav_uv" : MOD_ID "_uv");
+            } break;
+            case Downvote: {
+                BSML::Utilities::SetImage(badgeImg, isFavorite ? MOD_ID "_fav_dv" : MOD_ID "_dv");
+            } break;
+        }
+    } else {
+        badgeImg->sprite = defaultBadge.ptr();
     }
 
     auto rt = badgeImg->rectTransform;
