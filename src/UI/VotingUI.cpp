@@ -263,6 +263,10 @@ namespace BeatSaverVoting::UI {
                 UpdateView(errorMessage, errorMessageItr == errorMessages.end());
 
                 ERROR("Error {}: {}", response.httpCode, errorMessage);
+                if (response.DataParsedSuccessful() && response.responseData.has_value()) {
+                    ERROR("Server success response: {}", response.responseData->success);
+                    ERROR("Server error response: {}", response.responseData->error.value_or("(null)"));
+                }
 
                 if (callback) callback(hash, false, false, currentVoteCount);
             }
