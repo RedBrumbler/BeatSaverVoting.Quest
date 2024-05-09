@@ -28,10 +28,10 @@ static std::string HashForLevelID(std::string levelId) {
 namespace BeatSaverVoting::UI {
     VotingUI* VotingUI::_instance = nullptr;
 
-    void VotingUI::ctor(GlobalNamespace::ResultsViewController* resultsViewController, GlobalNamespace::PlatformLeaderboardsModel* leaderboardsModel, GlobalNamespace::LevelCollectionTableView* levelCollectionTable) {
+    void VotingUI::ctor(GlobalNamespace::ResultsViewController* resultsViewController, GlobalNamespace::PlatformLeaderboardsModel* leaderboardsModel, GlobalNamespace::LevelCollectionViewController* levelCollectionViewController) {
         INVOKE_CTOR();
         _resultsViewController = resultsViewController;
-        _levelCollectionTable = levelCollectionTable;
+        _levelCollectionTable = levelCollectionViewController->_levelCollectionTableView;
         _userModel = leaderboardsModel->_platformUserModel;
 
         _downloader.userAgent = MOD_ID "/" VERSION " (+https://github.com/RedBrumbler/BeatSaverVoting.Quest)";

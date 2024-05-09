@@ -11,6 +11,7 @@
 #include "TMPro/TextMeshProUGUI.hpp"
 
 #include "GlobalNamespace/ResultsViewController.hpp"
+#include "GlobalNamespace/LevelCollectionViewController.hpp"
 #include "GlobalNamespace/LevelCollectionTableView.hpp"
 #include "GlobalNamespace/PlatformLeaderboardsModel.hpp"
 #include "GlobalNamespace/IPlatformUserModel.hpp"
@@ -42,7 +43,7 @@ DECLARE_CLASS_CODEGEN_INTERFACES(BeatSaverVoting::UI, VotingUI, System::Object, 
         DECLARE_INSTANCE_METHOD(void, UpvoteButtonPressed);
         DECLARE_INSTANCE_METHOD(void, DownvoteButtonPressed);
 
-        DECLARE_CTOR(ctor, GlobalNamespace::ResultsViewController* resultsViewController, GlobalNamespace::PlatformLeaderboardsModel* leaderboardsModel, GlobalNamespace::LevelCollectionTableView* levelCollectionTable);
+        DECLARE_CTOR(ctor, GlobalNamespace::ResultsViewController* resultsViewController, GlobalNamespace::PlatformLeaderboardsModel* leaderboardsModel, GlobalNamespace::LevelCollectionViewController* levelCollectionViewController);
     public:
         static VotingUI* get_instance() { return _instance; }
         bool get_upInteractable() { return _upButton ? _upButton->interactable : false; }
