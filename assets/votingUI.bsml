@@ -1,0 +1,6 @@
+<vertical anchor-min-x='1' anchor-pos-x='-15' vertical-fit='PreferredSize'>
+    <text id='_voteTitle' text='BeatSaver Voting' align='Center'/>
+    <page-button id='_upButton' direction='Up' on-click='UpvoteButtonPressed' pref-width='10'/>
+    <text id='_voteText' text='Num' align='Center'/>
+    <page-button id='_downButton' direction='Down' on-click='DownvoteButtonPressed' pref-width='10'/>
+</vertical>
