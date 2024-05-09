@@ -79,6 +79,7 @@ namespace BeatSaverVoting::UI {
     }
 
     void VotingUI::ResultsView_DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling) {
+        DEBUG("Results activated");
         GetVotesForMap();
     }
 
@@ -130,7 +131,10 @@ namespace BeatSaverVoting::UI {
 
     void VotingUI::GetVotesForMap() {
         // if we don't have a level dont do anything
-        if (lastLevel == nullptr) return;
+        if (lastLevel == nullptr) {
+            WARNING("Last level was not set, can't get info for nonexistent map");
+            return;
+        }
 
         bool isCustomLevel = lastLevel->levelID.starts_with(u"custom_level_");
         _upButton->gameObject->SetActive(isCustomLevel);
@@ -142,6 +146,7 @@ namespace BeatSaverVoting::UI {
         _voteText->text = isCustomLevel ? Loading : Empty;
 
         if (isCustomLevel) {
+            DEBUG("Level was custom, getting rating...");
             _voteTitle->StartCoroutine(custom_types::Helpers::CoroutineHelper::New(GetRatingForSong(lastLevel)));
         }
     }
@@ -154,7 +159,7 @@ namespace BeatSaverVoting::UI {
         // get the beatmap from beatsaver
         auto response = _downloader.Get<BeatSaver::API::BeatmapResponse>(BeatSaver::API::GetBeatmapByHashURLOptions(hash));
         if (!response.IsSuccessful() || !response.DataParsedSuccessful()) {
-            DEBUG("Failed to fetch beatmap data from beatsaver");
+            WARNING("Failed to fetch beatmap data from beatsaver");
             return std::nullopt;
         }
 
@@ -305,7 +310,9 @@ namespace BeatSaverVoting::UI {
     void VotingUI::UpdateUIAfterVote(std::string hash, bool success, bool upvote, int newTotal) {
         if (!success) return;
 
-        bool hasPreviousVote = VoteStatus::GetCurrentVoteStatus(hash).has_value();
+        auto currentStatus = VoteStatus::GetCurrentVoteStatus(hash);
+        bool hasPreviousVote = currentStatus.has_value();
+
         auto expectedVoteStatus = upvote ? VoteType::Upvote : VoteType::Downvote;
         upInteractable = !upvote;
         downInteractable = upvote;
@@ -326,8 +333,7 @@ namespace BeatSaverVoting::UI {
             _voteText->text = std::to_string(newTotal);
         }
 
-        auto status = VoteStatus::GetCurrentVoteStatus(hash);
-        if (!status.has_value() || status.value() != expectedVoteStatus) {
+        if (!currentStatus.has_value() || currentStatus.value() != expectedVoteStatus) {
             VoteStatus::SetVoteStatus(hash, expectedVoteStatus);
             _levelCollectionTable->_tableView->RefreshCellsContent();
         }
