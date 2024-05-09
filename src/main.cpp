@@ -26,7 +26,7 @@ BEATSAVER_VOTING_EXPORT_FUNC void late_load() {
 
     BSML::Init();
     custom_types::Register::AutoRegister();
-    // BeatSaverVoting::Hooking::InstallHooks();
+    BeatSaverVoting::Hooking::InstallHooks();
 
     auto zenjector = Lapiz::Zenject::Zenjector::Get();
 
