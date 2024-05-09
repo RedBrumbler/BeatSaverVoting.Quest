@@ -130,13 +130,8 @@ namespace BeatSaverVoting::UI {
     }
 
     void VotingUI::GetVotesForMap() {
-        // if we don't have a level dont do anything
-        if (lastLevel == nullptr) {
-            WARNING("Last level was not set, can't get info for nonexistent map");
-            return;
-        }
-
-        bool isCustomLevel = lastLevel->levelID.starts_with(u"custom_level_");
+        // if no level, just short to false
+        bool isCustomLevel = lastLevel != nullptr && lastLevel->levelID.starts_with(u"custom_level_");
         _upButton->gameObject->SetActive(isCustomLevel);
         _downButton->gameObject->SetActive(isCustomLevel);
         _voteTitle->gameObject->SetActive(isCustomLevel);
@@ -148,6 +143,8 @@ namespace BeatSaverVoting::UI {
         if (isCustomLevel) {
             DEBUG("Level was custom, getting rating...");
             _voteTitle->StartCoroutine(custom_types::Helpers::CoroutineHelper::New(GetRatingForSong(lastLevel)));
+        } else {
+            DEBUG("Level was not custom or not set. Was set: {}", lastLevel != nullptr);
         }
     }
 
