@@ -15,7 +15,7 @@
 static std::string HashForLevelID(std::string levelId) {
     auto hashView = std::string_view(levelId);
     if (!hashView.starts_with("custom_level_")) return "";
-    hashView = hashView.substr(0, 13);
+    hashView = hashView.substr(13);
     if (hashView.ends_with(" WIP")) hashView = hashView.substr(0, hashView.size() - 4);
     return std::string(hashView);
 }
