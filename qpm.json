@@ -24,7 +24,7 @@
   "dependencies": [
     {
       "id": "beatsaverplusplus",
-      "versionRange": "^0.0.9",
+      "versionRange": "^0.0.10",
       "additionalData": {}
     },
     {

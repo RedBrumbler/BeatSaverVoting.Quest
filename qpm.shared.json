@@ -288,17 +288,17 @@
     {
       "dependency": {
         "id": "beatsaverplusplus",
-        "versionRange": "=0.0.9",
+        "versionRange": "=0.0.10",
         "additionalData": {
-          "soLink": "https://github.com/RedBrumbler/BeatSaverPlusPlus/releases/download/v0.0.9/libbeatsaverplusplus.so",
-          "debugSoLink": "https://github.com/RedBrumbler/BeatSaverPlusPlus/releases/download/v0.0.9/debug_libbeatsaverplusplus.so",
+          "soLink": "https://github.com/RedBrumbler/BeatSaverPlusPlus/releases/download/v0.0.10/libbeatsaverplusplus.so",
+          "debugSoLink": "https://github.com/RedBrumbler/BeatSaverPlusPlus/releases/download/v0.0.10/debug_libbeatsaverplusplus.so",
           "overrideSoName": "libbeatsaverplusplus.so",
-          "modLink": "https://github.com/RedBrumbler/BeatSaverPlusPlus/releases/download/v0.0.9/BeatSaverPlusPlus.qmod",
-          "branchName": "version/v0_0_9",
+          "modLink": "https://github.com/RedBrumbler/BeatSaverPlusPlus/releases/download/v0.0.10/BeatSaverPlusPlus.qmod",
+          "branchName": "version/v0_0_10",
           "cmake": false
         }
       },
-      "version": "0.0.9"
+      "version": "0.0.10"
     }
   ]
 }
