@@ -22,14 +22,15 @@ namespace BeatSaverVoting {
 
 
     std::optional<VoteType> VoteStatus::GetCurrentVoteStatus(std::string hash) {
+        std::transform(hash.begin(), hash.end(), hash.begin(), tolower);
         auto itr = config.votedSongs.find(hash);
         if (itr == config.votedSongs.end()) return std::nullopt;
         return itr->second;
     }
 
     void VoteStatus::SetVoteStatus(std::string hash, VoteType voteStatus) {
+        std::transform(hash.begin(), hash.end(), hash.begin(), tolower);
         config.votedSongs[hash] = voteStatus;
         SaveConfig();
     }
-
 }
