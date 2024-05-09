@@ -152,6 +152,7 @@ namespace BeatSaverVoting::UI {
 
     std::optional<Song> VotingUI::GetSongInfo(std::string hash) {
         try {
+            DEBUG("Attempting to get song info for {}", hash);
             if (hash.empty()) return std::nullopt;
 
             // get the beatmap from beatsaver
@@ -233,6 +234,7 @@ namespace BeatSaverVoting::UI {
         };
         auto [urlOptions, data] = BeatSaver::API::PostVoteURLOptionsAndData(auth, upvote, hash);
         urlOptions.headers["Content-Type"] = "application/json";
+        urlOptions.useSSL = true;
 
         _voteTitle->StartCoroutine(custom_types::Helpers::CoroutineHelper::New(PerformVote(hash, upvote, urlOptions, data, currentVoteCount, callback)));
         co_return;
@@ -247,6 +249,7 @@ namespace BeatSaverVoting::UI {
         if (!response.IsSuccessful()) {
             if (response.curlStatus != 0) {
                 ERROR("Curl status return for vote: {}", response.curlStatus);
+                UpdateView(fmt::format("Program\nError"), false);
                 if (callback) callback(hash, false, false, currentVoteCount);
             } else if (response.httpCode < 200 || response.httpCode >= 300) {
                 static std::map<int, std::string> errorMessages = {
@@ -273,6 +276,7 @@ namespace BeatSaverVoting::UI {
 
     static std::string GetScoreFromVotes(int upVotes, int downVotes) {
         double totalVotes = upVotes + downVotes;
+
         auto rawScore = upVotes / totalVotes;
         auto scoreWeighted = rawScore - (rawScore - 0.5) * std::pow(2.0, -std::log(totalVotes / 2 + 1) / std::log(3));
 
