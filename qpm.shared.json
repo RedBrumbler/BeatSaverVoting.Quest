@@ -9,7 +9,8 @@
       "version": "0.1.0",
       "url": "https://github.com/RedBrumbler/BeatSaverVoting.Quest",
       "additionalData": {
-        "cmake": false
+        "cmake": false,
+        "overrideSoName": "libbeatsavervoting.so"
       }
     },
     "workspace": {
