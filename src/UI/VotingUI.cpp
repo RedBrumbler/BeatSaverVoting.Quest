@@ -262,7 +262,7 @@ namespace BeatSaverVoting::UI {
                 auto errorMessage = errorMessageItr != errorMessages.end() ? errorMessageItr->second : fmt::format("Error\n{}", response.httpCode);
                 UpdateView(errorMessage, errorMessageItr == errorMessages.end());
 
-                ERROR("Error {}: {}", response.httpCode, errorMessage);
+                ERROR("Http response code {}", response.httpCode);
                 if (response.DataParsedSuccessful() && response.responseData.has_value()) {
                     ERROR("Server success response: {}", response.responseData->success);
                     ERROR("Server error response: {}", response.responseData->error.value_or("(null)"));
