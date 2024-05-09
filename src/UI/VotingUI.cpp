@@ -25,6 +25,17 @@ static std::string HashForLevelID(std::string levelId) {
     return std::string(hashView);
 }
 
+static bool CompareHashes(std::string_view a, std::string_view b) {
+    if (a.size() != b.size()) return false;
+
+    // for each character in the hash, convert to lower and compare. if any don't match this is not the same hash
+    for (auto aItr = a.begin(), bItr = b.begin(); aItr != a.end(); aItr++, bItr++) {
+        if (tolower(*aItr) != tolower(*bItr)) return false;
+    }
+
+    return true;
+}
+
 namespace BeatSaverVoting::UI {
     VotingUI* VotingUI::_instance = nullptr;
 
@@ -147,10 +158,10 @@ namespace BeatSaverVoting::UI {
             return std::nullopt;
         }
 
-        // check whether the correct beatmap
+        // check whether the correct beatmap exists in the response data
         auto& beatmap = response.responseData.value();
         auto versions = beatmap.Versions;
-        auto itr = std::find_if(versions.begin(), versions.end(), [&hash](auto& x){ return x.Hash == hash; });
+        auto itr = std::find_if(versions.begin(), versions.end(), [hash = std::string_view(hash)](auto& x){ return CompareHashes(x.Hash, hash); });
         if (itr == versions.end()) return std::nullopt;
 
         return Song(beatmap);
