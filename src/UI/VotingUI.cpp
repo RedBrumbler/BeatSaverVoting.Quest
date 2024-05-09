@@ -20,7 +20,7 @@ DEFINE_TYPE(BeatSaverVoting::UI, VotingUI);
 static std::string HashForLevelID(std::string levelId) {
     auto hashView = std::string_view(levelId);
     if (!hashView.starts_with("custom_level_")) return "";
-    hashView = hashView.substr(0, 13);
+    hashView = hashView.substr(13);
     if (hashView.ends_with(" WIP")) hashView = hashView.substr(0, hashView.size() - 4);
     return std::string(hashView);
 }
@@ -196,7 +196,7 @@ namespace BeatSaverVoting::UI {
 
         auto userInfoTask = _userModel->GetUserInfo(::System::Threading::CancellationToken());
         auto userAuthTask = _userModel->GetUserAuthToken();
-        while (!userInfoTask->IsCompleted && !userAuthTask->IsCompleted) co_yield nullptr;
+        while (!userInfoTask->IsCompleted || !userAuthTask->IsCompleted) co_yield nullptr;
         auto userInfo = userInfoTask->Result;
         auto authData = userAuthTask->Result;
 
