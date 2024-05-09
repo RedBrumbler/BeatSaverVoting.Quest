@@ -14,6 +14,7 @@
 
 #include "beatsaverplusplus/shared/BeatSaver.hpp"
 #include <chrono>
+#include <exception>
 
 DEFINE_TYPE(BeatSaverVoting::UI, VotingUI);
 
@@ -131,6 +132,7 @@ namespace BeatSaverVoting::UI {
 
     void VotingUI::GetVotesForMap() {
         // if no level, just short to false
+        auto lastLevel = _resultsViewController->_beatmapLevel;
         bool isCustomLevel = lastLevel != nullptr && lastLevel->levelID.starts_with(u"custom_level_");
         _upButton->gameObject->SetActive(isCustomLevel);
         _downButton->gameObject->SetActive(isCustomLevel);
@@ -144,29 +146,40 @@ namespace BeatSaverVoting::UI {
             DEBUG("Level was custom, getting rating...");
             _voteTitle->StartCoroutine(custom_types::Helpers::CoroutineHelper::New(GetRatingForSong(lastLevel)));
         } else {
-            DEBUG("Level was not custom or not set. Was set: {}", lastLevel != nullptr);
+            DEBUG("Level was not custom or not set. level ptr: {}", fmt::ptr(lastLevel));
         }
     }
 
     std::optional<Song> VotingUI::GetSongInfo(std::string hash) {
-        if (hash.empty()) return std::nullopt;
+        try {
+            if (hash.empty()) return std::nullopt;
 
-        _lastBeatsaverSong = std::nullopt;
+            // get the beatmap from beatsaver
+            auto response = _downloader.Get<BeatSaver::API::BeatmapResponse>(BeatSaver::API::GetBeatmapByHashURLOptions(hash));
+            if (!response.IsSuccessful() || !response.DataParsedSuccessful()) {
+                WARNING("Failed to fetch beatmap data from beatsaver");
+                return std::nullopt;
+            }
 
-        // get the beatmap from beatsaver
-        auto response = _downloader.Get<BeatSaver::API::BeatmapResponse>(BeatSaver::API::GetBeatmapByHashURLOptions(hash));
-        if (!response.IsSuccessful() || !response.DataParsedSuccessful()) {
-            WARNING("Failed to fetch beatmap data from beatsaver");
-            return std::nullopt;
+            // check whether the correct beatmap exists in the response data
+            auto& beatmap = response.responseData.value();
+            auto versions = beatmap.Versions;
+            auto itr = std::find_if(versions.begin(), versions.end(), [hash = std::string_view(hash)](auto& x){ return CompareHashes(x.Hash, hash); });
+            if (itr == versions.end()) {
+                WARNING("Did not find hash {} in versions of beatmaps on beatsaver", hash);
+                return std::nullopt;
+            }
+
+            return Song(beatmap);
+        } catch(BeatSaver::JsonException const& e) {
+            ERROR("Caught exception: {}, what: {}", typeid(e).name(), e.what());
+        } catch(std::exception const& e) {
+            ERROR("Caught exception: {}, what: {}", typeid(e).name(), e.what());
+        } catch(...) {
+            ERROR("Caught unknown exception: {}", typeid(std::current_exception()).name());
         }
 
-        // check whether the correct beatmap exists in the response data
-        auto& beatmap = response.responseData.value();
-        auto versions = beatmap.Versions;
-        auto itr = std::find_if(versions.begin(), versions.end(), [hash = std::string_view(hash)](auto& x){ return CompareHashes(x.Hash, hash); });
-        if (itr == versions.end()) return std::nullopt;
-
-        return Song(beatmap);
+        return std::nullopt;
     }
 
     std::future<std::optional<Song>> VotingUI::GetSongInfoAsync(std::string hash) {
@@ -198,7 +211,7 @@ namespace BeatSaverVoting::UI {
 
     custom_types::Helpers::Coroutine VotingUI::VoteForSongAsync(std::string hash, bool upvote, VoteCallback callback) {
         auto songFuture = GetSongInfoAsync(hash);
-        while (songFuture.wait_for(std::chrono::milliseconds(0)) != std::future_status::ready)
+        while (songFuture.valid() && songFuture.wait_for(std::chrono::milliseconds(0)) != std::future_status::ready)
             co_yield nullptr;
         VoteForSong(songFuture.get(), upvote, callback);
         co_return;
@@ -227,7 +240,7 @@ namespace BeatSaverVoting::UI {
 
     custom_types::Helpers::Coroutine VotingUI::PerformVote(std::string hash, bool upvote, WebUtils::URLOptions urlOptions, std::string data, int currentVoteCount, VoteCallback callback) {
         auto postFuture = _downloader.PostAsync<BeatSaver::API::VoteResponse>(urlOptions, std::span<uint8_t const>((uint8_t*)data.data(), data.size()));
-        while (postFuture.wait_for(std::chrono::milliseconds(0)) != std::future_status::ready)
+        while (postFuture.valid() && postFuture.wait_for(std::chrono::milliseconds(0)) != std::future_status::ready)
             co_yield nullptr;
 
         auto response = postFuture.get();
@@ -267,33 +280,47 @@ namespace BeatSaverVoting::UI {
     }
 
     custom_types::Helpers::Coroutine VotingUI::GetRatingForSong(GlobalNamespace::BeatmapLevel* level) {
-        auto levelHash = HashForLevelID(lastLevel->levelID);
-        // not custom
-        if (levelHash.empty()) co_return;
-        _lastBeatsaverSong = std::nullopt;
+        try {
+            auto levelHash = HashForLevelID(level->levelID);
+            // not custom
+            if (levelHash.empty()) co_return;
+            _lastBeatsaverSong = std::nullopt;
 
-        auto songFuture = GetSongInfoAsync(levelHash);
-        while (songFuture.wait_for(std::chrono::milliseconds(0)) != std::future_status::ready)
-            co_yield nullptr;
+            auto songFuture = GetSongInfoAsync(levelHash);
+            if (!songFuture.valid()) {
+                ERROR("Got invalid song future, returning...");
+                co_return;
+            }
 
-        _lastBeatsaverSong = songFuture.get();
-        // song not on beatsaver
-        if (!_lastBeatsaverSong.has_value())
+            while (songFuture.valid() && songFuture.wait_for(std::chrono::milliseconds(0)) != std::future_status::ready)
+                co_yield nullptr;
+
+            _lastBeatsaverSong = songFuture.get();
+            // song not on beatsaver
+            if (!_lastBeatsaverSong.has_value()) {
+                UpdateView("Beatmap\nNot found", false);
+                co_return;
+            }
+
+            UpdateView(GetScoreFromVotes(_lastBeatsaverSong->upVotes, _lastBeatsaverSong->downVotes), true);
+
+            auto status = VoteStatus::GetCurrentVoteStatus(levelHash);
+            if (!status.has_value()) co_return;
+
+            switch (status.value()) {
+                using enum VoteType;
+                case Upvote: { upInteractable = false; } break;
+                case Downvote: { downInteractable = false; } break;
+            }
+
             co_return;
-
-        _voteText->text = GetScoreFromVotes(_lastBeatsaverSong->upVotes, _lastBeatsaverSong->downVotes);
-
-        upInteractable = true;
-        downInteractable = true;
-
-        auto status = VoteStatus::GetCurrentVoteStatus(levelHash);
-        if (!status.has_value()) co_return;
-
-        switch (status.value()) {
-            using enum VoteType;
-            case Upvote: { upInteractable = false; } break;
-            case Downvote: { downInteractable = false; } break;
+        } catch(std::exception const& e) {
+            ERROR("Caught exception: {}, what: {}", typeid(e).name(), e.what());
+        } catch(...) {
+            ERROR("Caught unknown exception: {}", typeid(std::current_exception()).name());
         }
+
+        UpdateView("Unknown\nError", false);
 
         co_return;
     }

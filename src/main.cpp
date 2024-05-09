@@ -11,7 +11,6 @@
 #include "UI/VotingUI.hpp"
 #include "Zenject/DiContainer.hpp"
 #include "Zenject/ScopeConcreteIdArgConditionCopyNonLazyBinder.hpp"
-#include "Utilities/PlayedLevelProvider.hpp"
 
 BEATSAVER_VOTING_EXPORT_FUNC void setup(CModInfo* info) {
     info->id = MOD_ID;
@@ -27,15 +26,12 @@ BEATSAVER_VOTING_EXPORT_FUNC void late_load() {
 
     BSML::Init();
     custom_types::Register::AutoRegister();
-    BeatSaverVoting::Hooking::InstallHooks();
+    // BeatSaverVoting::Hooking::InstallHooks();
 
     auto zenjector = Lapiz::Zenject::Zenjector::Get();
 
     zenjector->Install(Lapiz::Zenject::Location::Menu, [](auto container) {
+        DEBUG("Menu installer");
         container->template BindInterfacesAndSelfTo<BeatSaverVoting::UI::VotingUI*>()->AsSingle();
-    });
-
-    zenjector->Install(Lapiz::Zenject::Location::GameCore, [](auto container) {
-        container->template BindInterfacesAndSelfTo<BeatSaverVoting::Utilities::PlayedLevelProvider*>()->AsSingle();
     });
 }

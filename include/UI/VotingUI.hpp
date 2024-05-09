@@ -15,7 +15,6 @@
 #include "GlobalNamespace/LevelCollectionTableView.hpp"
 #include "GlobalNamespace/PlatformLeaderboardsModel.hpp"
 #include "GlobalNamespace/IPlatformUserModel.hpp"
-#include "Utilities/PlayedLevelProvider.hpp"
 
 #include "UnityEngine/AnimationClip.hpp"
 #include "UnityEngine/AnimationCurve.hpp"
@@ -34,8 +33,6 @@ DECLARE_CLASS_CODEGEN_INTERFACES(BeatSaverVoting::UI, VotingUI, System::Object, 
         DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::LevelCollectionTableView*, _levelCollectionTable);
         DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::IPlatformUserModel*, _userModel);
         DECLARE_INSTANCE_FIELD_PRIVATE(HMUI::ViewController::DidActivateDelegate*, _didActivateDelegate);
-
-        DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::BeatmapLevel*, lastLevel);
 
         DECLARE_OVERRIDE_METHOD_MATCH(void, Initialize, &Zenject::IInitializable::Initialize);
         DECLARE_OVERRIDE_METHOD_MATCH(void, Dispose, &System::IDisposable::Dispose);
@@ -61,7 +58,6 @@ DECLARE_CLASS_CODEGEN_INTERFACES(BeatSaverVoting::UI, VotingUI, System::Object, 
     private:
         using VoteCallback = std::function<void(std::string hash, bool success, bool userDirection, int newtotal)>;
 
-        friend class Utilities::PlayedLevelProvider;
         static VotingUI* _instance;
         WebUtils::DownloaderUtility _downloader;
         std::optional<Song> _lastBeatsaverSong;
