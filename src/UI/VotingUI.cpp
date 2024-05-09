@@ -234,7 +234,7 @@ namespace BeatSaverVoting::UI {
         };
         auto [urlOptions, data] = BeatSaver::API::PostVoteURLOptionsAndData(auth, upvote, hash);
         urlOptions.headers["Content-Type"] = "application/json";
-        urlOptions.useSSL = true;
+        urlOptions.useSSL = false;
 
         _voteTitle->StartCoroutine(custom_types::Helpers::CoroutineHelper::New(PerformVote(hash, upvote, urlOptions, data, currentVoteCount, callback)));
         co_return;
@@ -253,7 +253,7 @@ namespace BeatSaverVoting::UI {
                 if (callback) callback(hash, false, false, currentVoteCount);
             } else if (response.httpCode < 200 || response.httpCode >= 300) {
                 static std::map<int, std::string> errorMessages = {
-                    {500, "Server \nerror"},
+                    {500, "Server\nError"},
                     {401, "Invalid\nauth ticket"},
                     {404, "Beatmap not\nfound"},
                     {400, "Bad\nrequest"}
