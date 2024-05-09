@@ -3,6 +3,11 @@
 #include "assets.hpp"
 
 #include "GlobalNamespace/LevelListTableCell.hpp"
+#include "GlobalNamespace/BeatmapLevel.hpp"
+#include "UnityEngine/Transform.hpp"
+#include "UnityEngine/RectTransform.hpp"
+#include "HMUI/ImageView.hpp"
+
 #include "VoteStatus.hpp"
 #include "bsml/shared/Helpers/utilities.hpp"
 #include "bsml/shared/BSMLDataCache.hpp"

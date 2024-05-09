@@ -13,7 +13,13 @@
       }
     },
     "workspace": {
-      "scripts": {}
+      "scripts": {
+        "qmod": [
+          "pwsh ./scripts/build.ps1",
+          "qpm qmod manifest",
+          "pwsh ./scripts/createqmod.ps1 BeatSaverVoting"
+        ]
+      }
     },
     "dependencies": [
       {
@@ -61,6 +67,11 @@
       {
         "id": "lapiz",
         "versionRange": "^0.2.6",
+        "additionalData": {}
+      },
+      {
+        "id": "paper",
+        "versionRange": "^3.6.3",
         "additionalData": {}
       }
     ]

@@ -5,7 +5,6 @@
     "author": "RedBrumbler",
     "version": "${version}",
     "packageId": "com.beatgames.beatsaber",
-    "isLibrary": true,
     "description": "Quest mod to allow users to vote on beatsaver",
     "dependencies": [],
     "lateModFiles": [],
@@ -13,4 +12,4 @@
         "${binary}"
     ],
     "fileCopies": []
-  }
+}

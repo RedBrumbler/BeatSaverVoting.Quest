@@ -24,7 +24,9 @@ void SaveConfig() {
     rapidjson::Value votedSongs;
     votedSongs.SetArray();
     for (auto& [hash, vote] : config.votedSongs) {
-        votedSongs.PushBack(BeatSaverVoting::SongVote(hash, vote), allocator);
+        rapidjson::Value val;
+        val.Set<BeatSaverVoting::SongVote>({hash, vote}, allocator);
+        votedSongs.PushBack(val, allocator);
     }
 
     doc.AddMember("votedSongs", votedSongs, allocator);

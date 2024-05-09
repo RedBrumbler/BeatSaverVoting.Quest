@@ -60,14 +60,14 @@ add_custom_command(
 add_custom_command(
     TARGET beatsavervoting POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E rename
-    ${CMAKE_CURRENT_BINARY_DIR}/libbeatsaverplusplus.so ${CMAKE_CURRENT_BINARY_DIR}/debug/libbeatsaverplusplus.so
+    ${CMAKE_CURRENT_BINARY_DIR}/libbeatsavervoting.so ${CMAKE_CURRENT_BINARY_DIR}/debug/libbeatsavervoting.so
     COMMENT "move normal binary into debug folder"
 )
 
 add_custom_command(
     TARGET beatsavervoting POST_BUILD
     COMMAND ${CMAKE_STRIP} -g -S -d --strip-all
-    ${CMAKE_CURRENT_BINARY_DIR}/debug/libbeatsaverplusplus.so -o ${CMAKE_CURRENT_BINARY_DIR}/libbeatsaverplusplus.so
+    ${CMAKE_CURRENT_BINARY_DIR}/debug/libbeatsavervoting.so -o ${CMAKE_CURRENT_BINARY_DIR}/libbeatsavervoting.so
     COMMENT "Strip binary"
 )
 

@@ -8,6 +8,9 @@
 #include "assets.hpp"
 
 #include "HMUI/ButtonStaticAnimations.hpp"
+#include "System/Threading/Tasks/Task_1.hpp"
+#include "GlobalNamespace/PlatformUserAuthTokenData.hpp"
+#include "GlobalNamespace/BeatmapLevel.hpp"
 
 #include "beatsaverplusplus/shared/BeatSaver.hpp"
 #include <chrono>

@@ -9,6 +9,8 @@
 #include "lapiz/shared/zenject/Zenjector.hpp"
 
 #include "UI/VotingUI.hpp"
+#include "Zenject/DiContainer.hpp"
+#include "Zenject/ScopeConcreteIdArgConditionCopyNonLazyBinder.hpp"
 #include "Utilities/PlayedLevelProvider.hpp"
 
 BEATSAVER_VOTING_EXPORT_FUNC void setup(CModInfo* info) {
