@@ -258,6 +258,7 @@ namespace BeatSaverVoting::UI {
                     {404, "Beatmap not\nfound"},
                     {400, "Bad\nrequest"}
                 };
+
                 auto errorMessageItr = errorMessages.find(response.httpCode);
                 auto errorMessage = errorMessageItr != errorMessages.end() ? errorMessageItr->second : fmt::format("Error\n{}", response.httpCode);
                 UpdateView(errorMessage, errorMessageItr == errorMessages.end());
@@ -270,7 +271,19 @@ namespace BeatSaverVoting::UI {
 
                 if (callback) callback(hash, false, false, currentVoteCount);
             }
+
             co_return;
+        }
+
+        if (response.DataParsedSuccessful() && response.responseData.has_value()) {
+            INFO("Server success response: {}", response.responseData->success);
+            if (response.responseData->error.has_value())
+                WARNING("Server error response: {}", response.responseData->error.value());
+
+            if (response.responseData->success) {
+                UpdateView("Vote\nError", false);
+                if (callback) callback(hash, false, false, -1);
+            }
         }
 
         auto newTotal = currentVoteCount + (upvote ? 1 : -1);
