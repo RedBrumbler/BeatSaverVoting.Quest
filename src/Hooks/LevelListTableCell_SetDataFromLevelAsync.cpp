@@ -46,7 +46,7 @@ MAKE_AUTO_HOOK_MATCH(LevelListTableCell_SetDataFromLevelAsync, &GlobalNamespace:
             } break;
         }
     } else {
-        badgeImg->sprite = defaultBadge.ptr();
+        BSML::Utilities::SetImage(badgeImg, MOD_ID "_fav");
     }
 
     auto rt = badgeImg->rectTransform;
