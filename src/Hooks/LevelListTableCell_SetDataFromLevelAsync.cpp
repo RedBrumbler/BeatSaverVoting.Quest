@@ -29,6 +29,8 @@ MAKE_AUTO_HOOK_MATCH(LevelListTableCell_SetDataFromLevelAsync, &GlobalNamespace:
     if (!voteStatus.has_value() && !isFavorite) return;
 
     auto badgeImg = self->_favoritesBadgeImage;
+    // always enable so upvote stuff is shown
+    badgeImg->enabled = true;
 
     static SafePtrUnity<UnityEngine::Sprite> defaultBadge;
     if (!defaultBadge) {
