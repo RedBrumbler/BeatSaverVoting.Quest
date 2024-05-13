@@ -60,7 +60,7 @@ MAKE_AUTO_HOOK_MATCH(LevelListTableCell_SetDataFromLevelAsync, &GlobalNamespace:
 }
 
 BSML_DATACACHE(fav) { return Assets::Favorite_png; }
-BSML_DATACACHE(fav_dv) { return Assets::FavoriteUpvote_png; }
-BSML_DATACACHE(fav_uv) { return Assets::FavoriteDownvote_png; }
+BSML_DATACACHE(fav_uv) { return Assets::FavoriteUpvote_png; }
+BSML_DATACACHE(fav_dv) { return Assets::FavoriteDownvote_png; }
 BSML_DATACACHE(uv) { return Assets::Upvote_png; }
 BSML_DATACACHE(dv) { return Assets::Downvote_png; }
