@@ -45,14 +45,14 @@ DECLARE_CLASS_CODEGEN_INTERFACES(BeatSaverVoting::UI, VotingUI, System::Object, 
         static VotingUI* get_instance() { return _instance; }
         bool get_upInteractable() { return _upButton ? _upButton->interactable : false; }
         void set_upInteractable(bool interactable) {
-            if (_upButton && _upButton->m_CachedPtr) _upButton->interactable = interactable;
+            if (_upButton && _upButton->m_CachedPtr.m_value) _upButton->interactable = interactable;
         }
 
         __declspec(property(get=get_upInteractable, put=set_upInteractable)) bool upInteractable;
 
         bool get_downInteractable() { return _downButton ? _downButton->interactable : false; }
         void set_downInteractable(bool interactable) {
-            if (_downButton && _downButton->m_CachedPtr) _downButton->interactable = interactable;
+            if (_downButton && _downButton->m_CachedPtr.m_value) _downButton->interactable = interactable;
         }
         __declspec(property(get=get_downInteractable, put=set_downInteractable)) bool downInteractable;
     private:

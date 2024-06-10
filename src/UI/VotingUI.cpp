@@ -229,7 +229,7 @@ namespace BeatSaverVoting::UI {
 
         auto auth = BeatSaver::API::PlatformAuth {
             .platform = BeatSaver::API::UserPlatform::Oculus,
-            .userId = userInfo->platformUserId,
+            .userId = userInfo->___platformUserId,
             .proof = authData->token
         };
         auto [urlOptions, data] = BeatSaver::API::PostVoteURLOptionsAndData(auth, upvote, hash);

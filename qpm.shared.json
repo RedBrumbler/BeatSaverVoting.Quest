@@ -25,27 +25,27 @@
     "dependencies": [
       {
         "id": "beatsaverplusplus",
-        "versionRange": "^0.0.9",
+        "versionRange": "^0.1.1",
         "additionalData": {}
       },
       {
         "id": "web-utils",
-        "versionRange": "^0.5.2",
+        "versionRange": "^0.6.0",
         "additionalData": {}
       },
       {
         "id": "custom-types",
-        "versionRange": "^0.17.0",
+        "versionRange": "^0.17.8",
         "additionalData": {}
       },
       {
         "id": "bs-cordl",
-        "versionRange": "^3500.0.0",
+        "versionRange": "^3700.0.0",
         "additionalData": {}
       },
       {
         "id": "beatsaber-hook",
-        "versionRange": "^5.1.6",
+        "versionRange": "^5.1.7",
         "additionalData": {}
       },
       {
@@ -57,7 +57,7 @@
       },
       {
         "id": "bsml",
-        "versionRange": "^0.4.31",
+        "versionRange": "^0.4.37",
         "additionalData": {}
       },
       {
@@ -67,7 +67,7 @@
       },
       {
         "id": "lapiz",
-        "versionRange": "^0.2.6",
+        "versionRange": "^0.2.11",
         "additionalData": {}
       },
       {
@@ -81,32 +81,32 @@
     {
       "dependency": {
         "id": "bsml",
-        "versionRange": "=0.4.31",
+        "versionRange": "=0.4.37",
         "additionalData": {
-          "soLink": "https://github.com/RedBrumbler/Quest-BSML/releases/download/v0.4.31/libbsml.so",
-          "debugSoLink": "https://github.com/RedBrumbler/Quest-BSML/releases/download/v0.4.31/debug_libbsml.so",
+          "soLink": "https://github.com/RedBrumbler/Quest-BSML/releases/download/v0.4.37/libbsml.so",
+          "debugSoLink": "https://github.com/RedBrumbler/Quest-BSML/releases/download/v0.4.37/debug_libbsml.so",
           "overrideSoName": "libbsml.so",
-          "modLink": "https://github.com/RedBrumbler/Quest-BSML/releases/download/v0.4.31/BSML.qmod",
-          "branchName": "version/v0_4_31",
+          "modLink": "https://github.com/RedBrumbler/Quest-BSML/releases/download/v0.4.37/BSML.qmod",
+          "branchName": "version/v0_4_37",
           "cmake": true
         }
       },
-      "version": "0.4.31"
+      "version": "0.4.37"
     },
     {
       "dependency": {
         "id": "web-utils",
-        "versionRange": "=0.5.2",
+        "versionRange": "=0.6.3",
         "additionalData": {
-          "soLink": "https://github.com/RedBrumbler/WebUtils/releases/download/v0.5.2/libweb-utils.so",
-          "debugSoLink": "https://github.com/RedBrumbler/WebUtils/releases/download/v0.5.2/debug_libweb-utils.so",
+          "soLink": "https://github.com/RedBrumbler/WebUtils/releases/download/v0.6.3/libweb-utils.so",
+          "debugSoLink": "https://github.com/RedBrumbler/WebUtils/releases/download/v0.6.3/debug_libweb-utils.so",
           "overrideSoName": "libweb-utils.so",
-          "modLink": "https://github.com/RedBrumbler/WebUtils/releases/download/v0.5.2/WebUtils.qmod",
-          "branchName": "version/v0_5_2",
+          "modLink": "https://github.com/RedBrumbler/WebUtils/releases/download/v0.6.3/WebUtils.qmod",
+          "branchName": "version/v0_6_3",
           "cmake": false
         }
       },
-      "version": "0.5.2"
+      "version": "0.6.3"
     },
     {
       "dependency": {
@@ -122,13 +122,13 @@
     {
       "dependency": {
         "id": "sombrero",
-        "versionRange": "=0.1.40",
+        "versionRange": "=0.1.42",
         "additionalData": {
           "headersOnly": true,
-          "branchName": "version/v0_1_40"
+          "branchName": "version/v0_1_42"
         }
       },
-      "version": "0.1.40"
+      "version": "0.1.42"
     },
     {
       "dependency": {
@@ -185,13 +185,13 @@
     {
       "dependency": {
         "id": "custom-types",
-        "versionRange": "=0.17.7",
+        "versionRange": "=0.17.8",
         "additionalData": {
-          "soLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.7/libcustom-types.so",
-          "debugSoLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.7/debug_libcustom-types.so",
+          "soLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.8/libcustom-types.so",
+          "debugSoLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.8/debug_libcustom-types.so",
           "overrideSoName": "libcustom-types.so",
-          "modLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.7/CustomTypes.qmod",
-          "branchName": "version/v0_17_7",
+          "modLink": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching/releases/download/v0.17.8/CustomTypes.qmod",
+          "branchName": "version/v0_17_8",
           "compileOptions": {
             "cppFlags": [
               "-Wno-invalid-offsetof"
@@ -200,15 +200,15 @@
           "cmake": true
         }
       },
-      "version": "0.17.7"
+      "version": "0.17.8"
     },
     {
       "dependency": {
         "id": "bs-cordl",
-        "versionRange": "=3500.0.0",
+        "versionRange": "=3700.0.0",
         "additionalData": {
           "headersOnly": true,
-          "branchName": "version/v3500_0_0",
+          "branchName": "version/v3700_0_0",
           "compileOptions": {
             "includePaths": [
               "include"
@@ -223,35 +223,35 @@
           }
         }
       },
-      "version": "3500.0.0"
+      "version": "3700.0.0"
     },
     {
       "dependency": {
         "id": "beatsaber-hook",
-        "versionRange": "=5.1.6",
+        "versionRange": "=5.1.7",
         "additionalData": {
-          "soLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v5.1.6/libbeatsaber-hook_5_1_6.so",
-          "debugSoLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v5.1.6/debug_libbeatsaber-hook_5_1_6.so",
-          "branchName": "version/v5_1_6",
+          "soLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v5.1.7/libbeatsaber-hook_5_1_7.so",
+          "debugSoLink": "https://github.com/QuestPackageManager/beatsaber-hook/releases/download/v5.1.7/debug_libbeatsaber-hook_5_1_7.so",
+          "branchName": "version/v5_1_7",
           "cmake": true
         }
       },
-      "version": "5.1.6"
+      "version": "5.1.7"
     },
     {
       "dependency": {
         "id": "lapiz",
-        "versionRange": "=0.2.6",
+        "versionRange": "=0.2.11",
         "additionalData": {
-          "soLink": "https://github.com/raineio/Lapiz/releases/download/v0.2.6/liblapiz.so",
-          "debugSoLink": "https://github.com/raineio/Lapiz/releases/download/v0.2.6/debug_liblapiz.so",
+          "soLink": "https://github.com/raineio/Lapiz/releases/download/v0.2.11/liblapiz.so",
+          "debugSoLink": "https://github.com/raineio/Lapiz/releases/download/v0.2.11/debug_liblapiz.so",
           "overrideSoName": "liblapiz.so",
-          "modLink": "https://github.com/raineio/Lapiz/releases/download/v0.2.6/Lapiz.qmod",
-          "branchName": "version/v0_2_6",
+          "modLink": "https://github.com/raineio/Lapiz/releases/download/v0.2.11/Lapiz.qmod",
+          "branchName": "version/v0_2_11",
           "cmake": true
         }
       },
-      "version": "0.2.6"
+      "version": "0.2.11"
     },
     {
       "dependency": {
@@ -288,17 +288,17 @@
     {
       "dependency": {
         "id": "beatsaverplusplus",
-        "versionRange": "=0.0.10",
+        "versionRange": "=0.1.1",
         "additionalData": {
-          "soLink": "https://github.com/RedBrumbler/BeatSaverPlusPlus/releases/download/v0.0.10/libbeatsaverplusplus.so",
-          "debugSoLink": "https://github.com/RedBrumbler/BeatSaverPlusPlus/releases/download/v0.0.10/debug_libbeatsaverplusplus.so",
+          "soLink": "https://github.com/RedBrumbler/BeatSaverPlusPlus/releases/download/v0.1.1/libbeatsaverplusplus.so",
+          "debugSoLink": "https://github.com/RedBrumbler/BeatSaverPlusPlus/releases/download/v0.1.1/debug_libbeatsaverplusplus.so",
           "overrideSoName": "libbeatsaverplusplus.so",
-          "modLink": "https://github.com/RedBrumbler/BeatSaverPlusPlus/releases/download/v0.0.10/BeatSaverPlusPlus.qmod",
-          "branchName": "version/v0_0_10",
+          "modLink": "https://github.com/RedBrumbler/BeatSaverPlusPlus/releases/download/v0.1.1/BeatSaverPlusPlus.qmod",
+          "branchName": "version/v0_1_1",
           "cmake": false
         }
       },
-      "version": "0.0.10"
+      "version": "0.1.1"
     }
   ]
 }
