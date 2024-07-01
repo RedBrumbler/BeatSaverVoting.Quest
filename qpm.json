@@ -24,27 +24,27 @@
   "dependencies": [
     {
       "id": "beatsaverplusplus",
-      "versionRange": "^0.0.10",
+      "versionRange": "^0.1.1",
       "additionalData": {}
     },
     {
       "id": "web-utils",
-      "versionRange": "^0.5.2",
+      "versionRange": "^0.6.3",
       "additionalData": {}
     },
     {
       "id": "custom-types",
-      "versionRange": "^0.17.0",
+      "versionRange": "^0.17.8",
       "additionalData": {}
     },
     {
       "id": "bs-cordl",
-      "versionRange": "^3500.0.0",
+      "versionRange": "^3700.0.0",
       "additionalData": {}
     },
     {
       "id": "beatsaber-hook",
-      "versionRange": "^5.1.6",
+      "versionRange": "^5.1.7",
       "additionalData": {}
     },
     {
@@ -56,7 +56,7 @@
     },
     {
       "id": "bsml",
-      "versionRange": "^0.4.31",
+      "versionRange": "^0.4.37",
       "additionalData": {}
     },
     {
@@ -66,7 +66,7 @@
     },
     {
       "id": "lapiz",
-      "versionRange": "^0.2.6",
+      "versionRange": "^0.2.11",
       "additionalData": {}
     },
     {
