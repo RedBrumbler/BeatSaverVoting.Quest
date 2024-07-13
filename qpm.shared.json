@@ -20,17 +20,20 @@
           "qpm qmod manifest",
           "pwsh ./scripts/createqmod.ps1 BeatSaverVoting"
         ]
-      }
+      },
+      "qmodIncludeDirs": [],
+      "qmodIncludeFiles": [],
+      "qmodOutput": null
     },
     "dependencies": [
       {
         "id": "beatsaverplusplus",
-        "versionRange": "^0.0.9",
+        "versionRange": "^0.1.5",
         "additionalData": {}
       },
       {
         "id": "web-utils",
-        "versionRange": "^0.5.2",
+        "versionRange": "^0.6.0",
         "additionalData": {}
       },
       {
@@ -81,32 +84,32 @@
     {
       "dependency": {
         "id": "bsml",
-        "versionRange": "=0.4.31",
+        "versionRange": "=0.4.41",
         "additionalData": {
-          "soLink": "https://github.com/RedBrumbler/Quest-BSML/releases/download/v0.4.31/libbsml.so",
-          "debugSoLink": "https://github.com/RedBrumbler/Quest-BSML/releases/download/v0.4.31/debug_libbsml.so",
+          "soLink": "https://github.com/RedBrumbler/Quest-BSML/releases/download/v0.4.41/libbsml.so",
+          "debugSoLink": "https://github.com/RedBrumbler/Quest-BSML/releases/download/v0.4.41/debug_libbsml.so",
           "overrideSoName": "libbsml.so",
-          "modLink": "https://github.com/RedBrumbler/Quest-BSML/releases/download/v0.4.31/BSML.qmod",
-          "branchName": "version/v0_4_31",
+          "modLink": "https://github.com/RedBrumbler/Quest-BSML/releases/download/v0.4.41/BSML.qmod",
+          "branchName": "version/v0_4_41",
           "cmake": true
         }
       },
-      "version": "0.4.31"
+      "version": "0.4.41"
     },
     {
       "dependency": {
         "id": "web-utils",
-        "versionRange": "=0.5.2",
+        "versionRange": "=0.6.6",
         "additionalData": {
-          "soLink": "https://github.com/RedBrumbler/WebUtils/releases/download/v0.5.2/libweb-utils.so",
-          "debugSoLink": "https://github.com/RedBrumbler/WebUtils/releases/download/v0.5.2/debug_libweb-utils.so",
+          "soLink": "https://github.com/RedBrumbler/WebUtils/releases/download/v0.6.6/libweb-utils.so",
+          "debugSoLink": "https://github.com/RedBrumbler/WebUtils/releases/download/v0.6.6/debug_libweb-utils.so",
           "overrideSoName": "libweb-utils.so",
-          "modLink": "https://github.com/RedBrumbler/WebUtils/releases/download/v0.5.2/WebUtils.qmod",
-          "branchName": "version/v0_5_2",
+          "modLink": "https://github.com/RedBrumbler/WebUtils/releases/download/v0.6.6/WebUtils.qmod",
+          "branchName": "version/v0_6_6",
           "cmake": false
         }
       },
-      "version": "0.5.2"
+      "version": "0.6.6"
     },
     {
       "dependency": {
@@ -288,17 +291,17 @@
     {
       "dependency": {
         "id": "beatsaverplusplus",
-        "versionRange": "=0.0.10",
+        "versionRange": "=0.1.5",
         "additionalData": {
-          "soLink": "https://github.com/RedBrumbler/BeatSaverPlusPlus/releases/download/v0.0.10/libbeatsaverplusplus.so",
-          "debugSoLink": "https://github.com/RedBrumbler/BeatSaverPlusPlus/releases/download/v0.0.10/debug_libbeatsaverplusplus.so",
+          "soLink": "https://github.com/RedBrumbler/BeatSaverPlusPlus/releases/download/v0.1.5/libbeatsaverplusplus.so",
+          "debugSoLink": "https://github.com/RedBrumbler/BeatSaverPlusPlus/releases/download/v0.1.5/debug_libbeatsaverplusplus.so",
           "overrideSoName": "libbeatsaverplusplus.so",
-          "modLink": "https://github.com/RedBrumbler/BeatSaverPlusPlus/releases/download/v0.0.10/BeatSaverPlusPlus.qmod",
-          "branchName": "version/v0_0_10",
+          "modLink": "https://github.com/RedBrumbler/BeatSaverPlusPlus/releases/download/v0.1.5/BeatSaverPlusPlus.qmod",
+          "branchName": "version/v0_1_5",
           "cmake": false
         }
       },
-      "version": "0.0.10"
+      "version": "0.1.5"
     }
   ]
 }
