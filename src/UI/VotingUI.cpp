@@ -227,11 +227,32 @@ namespace BeatSaverVoting::UI {
         auto userInfo = userInfoTask->Result;
         auto authData = userAuthTask->Result;
 
+        // user info or auth data is null, return and print an auth error
+        if (!userInfo || !userInfo->___platformUserId || !authData || !authData->token) {
+            ERROR("User info null: {}", userInfo == nullptr);
+
+            if (userInfo == nullptr) {
+                ERROR("User info null!");
+            } else if (userInfo->___platformUserId == nullptr) {
+                ERROR("User platform id null!");
+            }
+
+            if (authData == nullptr) {
+                ERROR("Auth data null!");
+            } else if (authData->token == nullptr) {
+                ERROR("Auth token null!");
+            }
+
+            UpdateView("Auth\nError", false);
+            co_return;
+        }
+
         auto auth = BeatSaver::API::PlatformAuth {
             .platform = BeatSaver::API::UserPlatform::Oculus,
             .userId = userInfo->___platformUserId,
-            .proof = authData->token
+            .proof = authData->token,
         };
+
         auto [urlOptions, data] = BeatSaver::API::PostVoteURLOptionsAndData(auth, upvote, hash);
         urlOptions.headers["Content-Type"] = "application/json";
         urlOptions.useSSL = false;
